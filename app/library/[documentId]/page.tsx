@@ -1,0 +1,1 @@
+export default function DocumentPage({params}:{params:{documentId:string}}){return <><p className="muted">DOCUMENT / {params.documentId}</p><h1>Textbook breakdown</h1><div className="panel"><h2>Chapters will appear here</h2><p className="muted">Ingestion extracts concepts and builds your study path.</p></div></>}

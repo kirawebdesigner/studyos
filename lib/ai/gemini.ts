@@ -1,0 +1,4 @@
+import { GoogleGenAI } from "@google/genai";
+export const ai=new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY!});
+export async function embedText(text:string){const r=await ai.models.embedContent({model:"text-embedding-004",contents:text});return r.embeddings?.[0]?.values ?? [];}
+export async function generateRemedialExplanation(p:{conceptName:string;studentAnswer:string;idealAnswer:string;errorType:string;textbookContext:string}){const prompt=`You are Kirubel's Grade 10 tutor. Concept: ${p.conceptName}. Error: ${p.errorType}. Context: ${p.textbookContext}. Student: ${p.studentAnswer}. Truth: ${p.idealAnswer}. Be warm, under 100 words, validate partial intuition, correct one mistake, give one analogy, and end with a check question.`;const r=await ai.models.generateContent({model:"gemini-3.8-flash",contents:prompt});return r.text;}
